@@ -1,0 +1,38 @@
+<div class="room-field">
+  <label for="room-button">Room Number(s)</label>
+  <input type="hidden" id="room_number" name="room_number" value="{{ selected_rooms|join(',') }}">
+
+  <button type="button" class="room-button" id="room-button">
+    <span class="room-text" id="room-button-text">{% if selected_rooms|length == 1 %}Room {{ selected_rooms[0] }}{% elif selected_rooms %}Rooms {{ selected_rooms|join(', ') }} ({{ selected_rooms|length }}){% else %}Select one or more rooms{% endif %}</span>
+    <span class="room-arrow">&#9662;</span>
+  </button>
+
+  <div class="room-panel" id="room-panel">
+    <div class="room-legend">
+      <span><i class="room-dot free"></i> Available</span>
+      <span><i class="room-dot occupied"></i> Occupied</span>
+      <span><i class="room-dot picked"></i> Selected</span>
+      <span class="room-actions">
+        <button type="button" class="room-link" id="room-clear">Clear</button>
+        <button type="button" class="room-link" id="room-done">Done</button>
+      </span>
+    </div>
+
+    {% for f in floors %}
+    <div class="floor-row">
+      <div class="floor-name">Floor {{ f.floor }}</div>
+      <div class="room-grid">
+        {% for room in f.rooms %}
+          {% if room in selected_rooms %}
+            <button type="button" class="room-chip free selected" data-room="{{ room }}" title="Room {{ room }} - selected">{{ room }}</button>
+          {% elif room in occupied %}
+            <button type="button" class="room-chip occupied" disabled title="Room {{ room }} - occupied">{{ room }}</button>
+          {% else %}
+            <button type="button" class="room-chip free" data-room="{{ room }}" title="Room {{ room }} - available">{{ room }}</button>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>

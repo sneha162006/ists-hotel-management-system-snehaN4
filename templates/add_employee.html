@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Add Employee{% endblock %}
+{% block nav_employees %}active{% endblock %}
+
+{% block content %}
+<div class="page-title">
+  <h1>Add Employee</h1>
+  <a class="btn btn-gray" href="{{ url_for('employees') }}">← Back</a>
+</div>
+
+<div class="card">
+  <form method="POST" action="{{ url_for('add_employee') }}">
+    <div class="form-grid">
+    <div>
+      <label for="full_name">Full Name</label>
+      <input type="text" id="full_name" name="full_name"  required>
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email"  required>
+    </div>
+    <div>
+      <label for="phone">Phone</label>
+      <input type="text" id="phone" name="phone"  required>
+    </div>
+    <div>
+      <label for="gender">Gender</label>
+      <select id="gender" name="gender" required>
+        <option value="Male" >Male</option>
+        <option value="Female" >Female</option>
+        <option value="Other" >Other</option>
+      </select>
+    </div>
+    <div>
+      <label for="date_of_birth">Date of Birth</label>
+      <input type="date" id="date_of_birth" name="date_of_birth"  required>
+    </div>
+    <div>
+      <label for="department">Department</label>
+      <select id="department" name="department" required>
+        <option value="Reception" >Reception</option>
+        <option value="Housekeeping" >Housekeeping</option>
+        <option value="Restaurant" >Restaurant</option>
+        <option value="Kitchen" >Kitchen</option>
+        <option value="Security" >Security</option>
+        <option value="Management" >Management</option>
+        <option value="Maintenance" >Maintenance</option>
+        <option value="Accounts" >Accounts</option>
+      </select>
+    </div>
+    <div>
+      <label for="position">Position</label>
+      <select id="position" name="position" required>
+        <option value="Manager" >Manager</option>
+        <option value="Receptionist" >Receptionist</option>
+        <option value="Housekeeper" >Housekeeper</option>
+        <option value="Chef" >Chef</option>
+        <option value="Waiter" >Waiter</option>
+        <option value="Security Guard" >Security Guard</option>
+        <option value="Accountant" >Accountant</option>
+        <option value="Maintenance Staff" >Maintenance Staff</option>
+      </select>
+    </div>
+    <div>
+      <label for="salary">Salary</label>
+      <input type="number" id="salary" name="salary" min="0" step="0.01" required>
+    </div>
+    <div>
+      <label for="joining_date">Joining Date</label>
+      <input type="date" id="joining_date" name="joining_date"  required>
+    </div>
+    <div>
+      <label for="employee_status">Employee Status</label>
+      <select id="employee_status" name="employee_status" required>
+        <option value="Active" selected>Active</option>
+        <option value="On Leave" >On Leave</option>
+        <option value="Resigned" >Resigned</option>
+      </select>
+    </div>
+    <div class="full">
+      <label for="address">Address</label>
+      <textarea id="address" name="address" rows="2" required></textarea>
+    </div>
+    </div>
+
+    <div class="form-buttons">
+      <button type="submit" class="btn">Save Employee</button>
+      <a class="btn btn-gray" href="{{ url_for('employees') }}">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

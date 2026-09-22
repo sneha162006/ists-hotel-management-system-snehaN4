@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block nav_dashboard %}active{% endblock %}
+
+{% block content %}
+
+<div class="dash-head">
+  <div>
+    <h1>Dashboard</h1>
+    <p>Welcome back, {{ first_name }}! Here's an overview of your hotel today.</p>
+  </div>
+  <div class="date-box">
+    <svg><use href="#icon-calendar"/></svg>
+    <div>
+      <strong>{{ today }}</strong>
+      <span>Have a great day!</span>
+    </div>
+  </div>
+</div>
+
+<div class="cards">
+  <div class="stat-card tone-purple">
+    <svg><use href="#icon-users"/></svg>
+    <div class="stat-number">{{ total_customers }}</div>
+    <div class="stat-name">Total Customers</div>
+  </div>
+  <div class="stat-card tone-orange">
+    <svg><use href="#icon-person"/></svg>
+    <div class="stat-number">{{ total_employees }}</div>
+    <div class="stat-name">Total Employees</div>
+  </div>
+  <div class="stat-card tone-blue">
+    <svg><use href="#icon-bed"/></svg>
+    <div class="stat-number">{{ total_rooms }}</div>
+    <div class="stat-name">Total Rooms</div>
+  </div>
+  <div class="stat-card tone-green">
+    <svg><use href="#icon-bed-check"/></svg>
+    <div class="stat-number">{{ available }}</div>
+    <div class="stat-name">Available Rooms</div>
+  </div>
+  <div class="stat-card tone-red">
+    <svg><use href="#icon-bed-user"/></svg>
+    <div class="stat-number">{{ occupied }}</div>
+    <div class="stat-name">Occupied Rooms</div>
+  </div>
+  <div class="stat-card tone-purple">
+    <svg><use href="#icon-calendar"/></svg>
+    <div class="stat-number">{{ total_bookings }}</div>
+    <div class="stat-name">Total Bookings</div>
+  </div>
+</div>
+
+<div class="dash-grid">
+
+  <div class="card panel">
+    <div class="panel-head"><h2>Room Status</h2></div>
+    <div class="donut-wrap">
+      <div class="donut">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <circle cx="100" cy="100" r="82" fill="none" stroke="#dc4b4b" stroke-width="30"/>
+          <circle cx="100" cy="100" r="82" fill="none" stroke="#22a35a" stroke-width="30"
+                  pathLength="100" stroke-dasharray="{{ available_percent }} 100"/>
+        </svg>
+        <div class="donut-center">
+          <strong>{{ total_rooms }}</strong>
+          <span>Total Rooms</span>
+        </div>
+      </div>
+      <div class="legend">
+        <div><i class="dot green"></i> Available Rooms <b>{{ available }}</b></div>
+        <div><i class="dot red"></i> Occupied Rooms <b>{{ occupied }}</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card panel">
+    <div class="panel-head">
+      <h2>Recent Bookings</h2>
+      <a href="{{ url_for('customers') }}">View All</a>
+    </div>
+    {% for b in recent_bookings %}
+    <a class="list-item" href="{{ url_for('edit_customer', id=b.id) }}">
+      <div class="list-icon"><svg><use href="#icon-calendar"/></svg></div>
+      <div class="list-main">
+        <strong>{{ b.full_name }}</strong>
+        <span>{{ b.room_number|rooms_label }} &middot; {{ b.number_of_guests }} guest{{ '' if b.number_of_guests == 1 else 's' }}</span>
+      </div>
+      <div class="list-side">
+        {{ b.check_in_date|nice_date }}<br>
+        <span class="pill {{ b.booking_status|lower }}">{{ b.booking_status }}</span>
+      </div>
+    </a>
+    {% else %}
+    <div class="empty-small">No active bookings yet.</div>
+    {% endfor %}
+  </div>
+
+  <div class="card panel">
+    <div class="panel-head"><h2>Quick Actions</h2></div>
+    <div class="quick-grid">
+      <a class="quick-item tone-purple" href="{{ url_for('add_customer') }}">
+        <svg class="q-icon"><use href="#icon-users"/></svg> Add Customer
+        <svg class="chev"><use href="#icon-chevron"/></svg>
+      </a>
+      <a class="quick-item tone-orange" href="{{ url_for('add_employee') }}">
+        <svg class="q-icon"><use href="#icon-person"/></svg> Add Employee
+        <svg class="chev"><use href="#icon-chevron"/></svg>
+      </a>
+      <a class="quick-item tone-blue" href="{{ url_for('rooms') }}">
+        <svg class="q-icon"><use href="#icon-bed"/></svg> Manage Rooms
+        <svg class="chev"><use href="#icon-chevron"/></svg>
+      </a>
+      <a class="quick-item tone-green" href="{{ url_for('add_customer') }}">
+        <svg class="q-icon"><use href="#icon-calendar"/></svg> New Booking
+        <svg class="chev"><use href="#icon-chevron"/></svg>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Hotel{% endblock %} - ISTS</title>
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo-icon.png') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="icon-home" viewBox="0 0 24 24"><path d="M12 2.800 1.800 11.800h3V21h5.600v-6h3.200v6h5.600v-9.200h3z"/></symbol>
+    <symbol id="icon-users" viewBox="0 0 24 24">
+      <circle cx="12" cy="7.800" r="3.400"/>
+      <path d="M5.500 20.500c0-3.700 2.900-6.300 6.500-6.300s6.500 2.600 6.500 6.300z"/>
+      <circle cx="4.700" cy="10.200" r="2.400"/>
+      <path d="M0.500 19c0-2.600 1.900-4.600 4.300-4.600.9 0 1.700.2 2.300.6-1.300 1.100-2 2.600-2.100 4z"/>
+      <circle cx="19.300" cy="10.200" r="2.400"/>
+      <path d="M23.500 19c0-2.600-1.900-4.600-4.300-4.600-.9 0-1.700.2-2.300.6 1.300 1.100 2 2.600 2.100 4z"/>
+    </symbol>
+    <symbol id="icon-person" viewBox="0 0 24 24">
+      <circle cx="12" cy="7.200" r="4.200"/>
+      <path d="M4 21c0-4.500 3.600-7.500 8-7.500s8 3 8 7.500z"/>
+    </symbol>
+    <symbol id="icon-bed" viewBox="0 0 24 24">
+      <rect x="1.500" y="3.500" width="2.400" height="17" rx="1.200"/>
+      <circle cx="7.500" cy="9.500" r="2"/>
+      <rect x="11" y="7.500" width="11.500" height="5" rx="2"/>
+      <rect x="1.500" y="13" width="21" height="3.800" rx="1.400"/>
+      <rect x="20.100" y="13" width="2.400" height="7.500" rx="1.200"/>
+    </symbol>
+    <symbol id="icon-bed-check" viewBox="0 0 24 24">
+      <rect x="1.500" y="3" width="2.400" height="15.500" rx="1.200"/>
+      <rect x="5.800" y="5.500" width="11.500" height="4.200" rx="2"/>
+      <rect x="1.500" y="11" width="16" height="3.600" rx="1.400"/>
+      <circle cx="17.800" cy="16.800" r="5.400" style="stroke: var(--tone-card, var(--card-color)); stroke-width: 1.600"/>
+      <path d="M15.300 16.900l1.900 2 3.500-3.900" fill="none" stroke="#ffffff" stroke-width="1.700" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-bed-user" viewBox="0 0 24 24">
+      <rect x="1.500" y="3" width="2.400" height="15.500" rx="1.200"/>
+      <rect x="5.800" y="5.500" width="11.500" height="4.200" rx="2"/>
+      <rect x="1.500" y="11" width="16" height="3.600" rx="1.400"/>
+      <circle cx="17.800" cy="16.800" r="5.400" style="stroke: var(--tone-card, var(--card-color)); stroke-width: 1.600"/>
+      <circle cx="17.800" cy="15" r="1.600" fill="#ffffff"/>
+      <path d="M14.700 20.500c0-1.800 1.400-3 3.100-3s3.100 1.200 3.100 3z" fill="#ffffff"/>
+    </symbol>
+    <symbol id="icon-calendar" viewBox="0 0 24 24">
+      <rect x="2.500" y="4.500" width="19" height="17" rx="3.200"/>
+      <rect x="7" y="1.800" width="2.400" height="5.400" rx="1.200"/>
+      <rect x="14.600" y="1.800" width="2.400" height="5.400" rx="1.200"/>
+      <g style="fill: var(--tone-card, var(--card-color))">
+        <rect x="5.600" y="10.200" width="3" height="3" rx="0.600"/>
+        <rect x="10.500" y="10.200" width="3" height="3" rx="0.600"/>
+        <rect x="15.400" y="10.200" width="3" height="3" rx="0.600"/>
+        <rect x="5.600" y="15" width="3" height="3" rx="0.600"/>
+        <rect x="10.500" y="15" width="3" height="3" rx="0.600"/>
+        <rect x="15.400" y="15" width="3" height="3" rx="0.600"/>
+      </g>
+    </symbol>
+    <symbol id="icon-logout" viewBox="0 0 24 24">
+      <path d="M4 3h8.500v2.400H6.400v13.200h6.100V21H4z"/>
+      <path d="M14.500 8l4 4-4 4v-3H9.500v-2h5z"/>
+    </symbol>
+    <symbol id="icon-chevron" viewBox="0 0 24 24">
+      <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </svg>
+
+  <div class="sidebar">
+    <div class="logo">
+      <img src="{{ url_for('static', filename='images/logo-icon.png') }}" alt="ISTS logo">
+      <div><div class="logo-name">ISTS</div><div class="logo-sub">Hotel Management</div></div>
+    </div>
+
+    <nav class="side-nav">
+      <a href="{{ url_for('dashboard') }}" class="{% block nav_dashboard %}{% endblock %}">
+        <svg><use href="#icon-home"/></svg> Dashboard</a>
+      <a href="{{ url_for('customers') }}" class="{% block nav_customers %}{% endblock %}">
+        <svg><use href="#icon-users"/></svg> Customers</a>
+      <a href="{{ url_for('employees') }}" class="{% block nav_employees %}{% endblock %}">
+        <svg><use href="#icon-person"/></svg> Employees</a>
+      <a href="{{ url_for('rooms') }}" class="{% block nav_rooms %}{% endblock %}">
+        <svg><use href="#icon-bed"/></svg> Rooms</a>
+    </nav>
+
+    <a href="{{ url_for('logout') }}" class="side-logout">
+      <svg><use href="#icon-logout"/></svg> Logout</a>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <strong>ISTS Hotel Management System</strong>
+      <div class="topbar-right">
+        <button class="theme-button" type="button">🌙 Dark</button>
+        <span class="user-name">{{ session["full_name"] }}</span>
+        <a class="btn btn-gray btn-small" href="{{ url_for('logout') }}">Logout</a>
+      </div>
+    </div>
+
+    <div class="content">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+          <div class="message {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endwith %}
+
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+
+</body>
+</html>

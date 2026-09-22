@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}Add Customer{% endblock %}
+{% block nav_customers %}active{% endblock %}
+
+{% block content %}
+<div class="page-title">
+  <h1>Add Customer</h1>
+  <a class="btn btn-gray" href="{{ url_for('customers') }}">← Back</a>
+</div>
+
+<div class="card">
+  <form method="POST" action="{{ url_for('add_customer') }}">
+    <div class="form-grid">
+    <div>
+      <label for="full_name">Full Name</label>
+      <input type="text" id="full_name" name="full_name"  required>
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email"  required>
+    </div>
+    <div>
+      <label for="phone">Phone</label>
+      <input type="text" id="phone" name="phone"  required>
+    </div>
+    <div>
+      <label for="gender">Gender</label>
+      <select id="gender" name="gender" required>
+        <option value="Male" >Male</option>
+        <option value="Female" >Female</option>
+        <option value="Other" >Other</option>
+      </select>
+    </div>
+    <div>
+      <label for="date_of_birth">Date of Birth</label>
+      <input type="date" id="date_of_birth" name="date_of_birth"  required>
+    </div>
+    <div>
+      <label for="id_proof_type">ID Proof Type</label>
+      <select id="id_proof_type" name="id_proof_type" required>
+        <option value="Passport" >Passport</option>
+        <option value="Driving License" >Driving License</option>
+        <option value="National ID" >National ID</option>
+        <option value="Voter ID" >Voter ID</option>
+        <option value="Aadhaar Card" >Aadhaar Card</option>
+      </select>
+    </div>
+    <div>
+      <label for="id_proof_number">ID Proof Number</label>
+      <input type="text" id="id_proof_number" name="id_proof_number"  required>
+    </div>
+    {% include "_room_picker.html" %}
+    <div>
+      <label for="check_in_date">Check-in Date</label>
+      <input type="date" id="check_in_date" name="check_in_date"  required>
+    </div>
+    <div>
+      <label for="check_out_date">Check-out Date</label>
+      <input type="date" id="check_out_date" name="check_out_date"  required>
+    </div>
+    <div>
+      <label for="number_of_guests">Number of Guests</label>
+      <input type="number" id="number_of_guests" name="number_of_guests" min="1" required>
+    </div>
+    <div>
+      <label for="booking_status">Booking Status</label>
+      <select id="booking_status" name="booking_status" required>
+        <option value="Pending" >Pending</option>
+        <option value="Confirmed" selected>Confirmed</option>
+        <option value="Checked-in" >Checked-in</option>
+        <option value="Checked-out" >Checked-out</option>
+        <option value="Cancelled" >Cancelled</option>
+      </select>
+    </div>
+    <div>
+      <label for="payment_status">Payment Status</label>
+      <select id="payment_status" name="payment_status" required>
+        <option value="Pending" selected>Pending</option>
+        <option value="Partial" >Partial</option>
+        <option value="Paid" >Paid</option>
+      </select>
+    </div>
+    <div class="full">
+      <label for="address">Address</label>
+      <textarea id="address" name="address" rows="2" required></textarea>
+    </div>
+    </div>
+
+    <div class="form-buttons">
+      <button type="submit" class="btn">Save Customer</button>
+      <a class="btn btn-gray" href="{{ url_for('customers') }}">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

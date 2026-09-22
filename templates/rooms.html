@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Rooms{% endblock %}
+{% block nav_rooms %}active{% endblock %}
+
+{% block content %}
+<div class="page-title">
+  <div>
+    <h1>Rooms</h1>
+    <p class="sub">{{ total_rooms }} rooms &middot; {{ available }} available &middot; {{ occupied }} occupied</p>
+  </div>
+  <a class="btn" href="{{ url_for('add_customer') }}">+ New Booking</a>
+</div>
+
+<div class="rooms-legend">
+  <span><i class="dot green"></i> Available</span>
+  <span><i class="dot red"></i> Occupied</span>
+</div>
+
+{% for f in floors %}
+<div class="card floor-block">
+  <h2>Floor {{ f.floor }}</h2>
+  <div class="rooms-grid">
+    {% for room in f.rooms %}
+      {% if room in guests %}
+        <a class="room-card occupied" href="{{ url_for('customers', search=room) }}" title="Room {{ room }} - {{ guests[room].full_name }}">
+          <strong>{{ room }}</strong>
+          <span>Occupied</span>
+          <small>{{ guests[room].full_name }}</small>
+        </a>
+      {% else %}
+        <a class="room-card free" href="{{ url_for('add_customer') }}" title="Room {{ room }} - available">
+          <strong>{{ room }}</strong>
+          <span>Available</span>
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

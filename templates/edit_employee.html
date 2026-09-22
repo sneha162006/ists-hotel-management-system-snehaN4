@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Edit Employee{% endblock %}
+{% block nav_employees %}active{% endblock %}
+
+{% block content %}
+<div class="page-title">
+  <h1>Edit Employee</h1>
+  <a class="btn btn-gray" href="{{ url_for('employees') }}">← Back</a>
+</div>
+
+<div class="card">
+  <form method="POST" action="{{ url_for('edit_employee', id=employee.id) }}">
+    <div class="form-grid">
+    <div>
+      <label for="full_name">Full Name</label>
+      <input type="text" id="full_name" name="full_name" value="{{ employee.full_name }}"  required>
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" value="{{ employee.email }}"  required>
+    </div>
+    <div>
+      <label for="phone">Phone</label>
+      <input type="text" id="phone" name="phone" value="{{ employee.phone }}"  required>
+    </div>
+    <div>
+      <label for="gender">Gender</label>
+      <select id="gender" name="gender" required>
+        <option value="Male" {% if employee.gender == 'Male' %}selected{% endif %}>Male</option>
+        <option value="Female" {% if employee.gender == 'Female' %}selected{% endif %}>Female</option>
+        <option value="Other" {% if employee.gender == 'Other' %}selected{% endif %}>Other</option>
+      </select>
+    </div>
+    <div>
+      <label for="date_of_birth">Date of Birth</label>
+      <input type="date" id="date_of_birth" name="date_of_birth" value="{{ employee.date_of_birth }}"  required>
+    </div>
+    <div>
+      <label for="department">Department</label>
+      <select id="department" name="department" required>
+        <option value="Reception" {% if employee.department == 'Reception' %}selected{% endif %}>Reception</option>
+        <option value="Housekeeping" {% if employee.department == 'Housekeeping' %}selected{% endif %}>Housekeeping</option>
+        <option value="Restaurant" {% if employee.department == 'Restaurant' %}selected{% endif %}>Restaurant</option>
+        <option value="Kitchen" {% if employee.department == 'Kitchen' %}selected{% endif %}>Kitchen</option>
+        <option value="Security" {% if employee.department == 'Security' %}selected{% endif %}>Security</option>
+        <option value="Management" {% if employee.department == 'Management' %}selected{% endif %}>Management</option>
+        <option value="Maintenance" {% if employee.department == 'Maintenance' %}selected{% endif %}>Maintenance</option>
+        <option value="Accounts" {% if employee.department == 'Accounts' %}selected{% endif %}>Accounts</option>
+      </select>
+    </div>
+    <div>
+      <label for="position">Position</label>
+      <select id="position" name="position" required>
+        <option value="Manager" {% if employee.position == 'Manager' %}selected{% endif %}>Manager</option>
+        <option value="Receptionist" {% if employee.position == 'Receptionist' %}selected{% endif %}>Receptionist</option>
+        <option value="Housekeeper" {% if employee.position == 'Housekeeper' %}selected{% endif %}>Housekeeper</option>
+        <option value="Chef" {% if employee.position == 'Chef' %}selected{% endif %}>Chef</option>
+        <option value="Waiter" {% if employee.position == 'Waiter' %}selected{% endif %}>Waiter</option>
+        <option value="Security Guard" {% if employee.position == 'Security Guard' %}selected{% endif %}>Security Guard</option>
+        <option value="Accountant" {% if employee.position == 'Accountant' %}selected{% endif %}>Accountant</option>
+        <option value="Maintenance Staff" {% if employee.position == 'Maintenance Staff' %}selected{% endif %}>Maintenance Staff</option>
+      </select>
+    </div>
+    <div>
+      <label for="salary">Salary</label>
+      <input type="number" id="salary" name="salary" value="{{ employee.salary }}" min="0" step="0.01" required>
+    </div>
+    <div>
+      <label for="joining_date">Joining Date</label>
+      <input type="date" id="joining_date" name="joining_date" value="{{ employee.joining_date }}"  required>
+    </div>
+    <div>
+      <label for="employee_status">Employee Status</label>
+      <select id="employee_status" name="employee_status" required>
+        <option value="Active" {% if employee.employee_status == 'Active' %}selected{% endif %}>Active</option>
+        <option value="On Leave" {% if employee.employee_status == 'On Leave' %}selected{% endif %}>On Leave</option>
+        <option value="Resigned" {% if employee.employee_status == 'Resigned' %}selected{% endif %}>Resigned</option>
+      </select>
+    </div>
+    <div class="full">
+      <label for="address">Address</label>
+      <textarea id="address" name="address" rows="2" required>{{ employee.address }}</textarea>
+    </div>
+    </div>
+
+    <div class="form-buttons">
+      <button type="submit" class="btn">Update Employee</button>
+      <a class="btn btn-gray" href="{{ url_for('employees') }}">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
